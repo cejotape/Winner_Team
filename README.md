@@ -24,6 +24,11 @@ Third commit - Runway Class
 - AdvanceTick() updates runway state over time (each tick = 15 mins in real life). 
 - ReleaseRunway() frees the runway after landing (after 3 ticks).
 
+Fourth commit - Attribute Name Standardization
+
+· Replaced "fuelConsumption" with "consumoCombustible" across all classes, in order to follow the rules of the PW.
+· Introduced "type" attribute that was previously missing from the Aircraft class.
+· Subclasses updated to pass their corresponding type strings. 
 ----------------------------------------------------------------------------------
 
 

@@ -5,7 +5,7 @@ namespace AirUFV
     {
         private string owner;
 
-        public PrivateAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, string owner) : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
+        public PrivateAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double consumoCombustible, double currentFuel, string owner) : base(id, status, distance, "Private", speed, fuelCapacity, consumoCombustible, currentFuel)
         {
             this.owner = owner;
         }

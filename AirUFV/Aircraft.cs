@@ -11,19 +11,21 @@ namespace AirUFV
         private AircraftStatus status; 
         private string id; //to identify any aircraft
         private int distance; //kilometers
+        private string type; //type of aircraft
         private int speed; //km/h
         private double fuelCapacity; //liters 
-        private double fuelConsumption; // liters/km
+        private double consumoCombustible; // liters/km
         private double currentFuel; //liters
 
-        public Aircraft (string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
+        public Aircraft (string id, AircraftStatus status, int distance, string type, int speed, double fuelCapacity, double consumoCombustible, double currentFuel)
         {
             this.id = id;
             this.status = status;
             this.distance = distance;
+            this.type = type;
             this.speed = speed;
             this.fuelCapacity = fuelCapacity;
-            this.fuelConsumption = fuelConsumption;
+            this.consumoCombustible = consumoCombustible;
             this.currentFuel = currentFuel;
         }
         public string GetId()
@@ -42,6 +44,10 @@ namespace AirUFV
         {
             return this.distance;
         }
+        public string GetTypeAircraft()
+        {
+            return this.type;
+        }
         public int GetSpeed()
         {
             return this.speed;
@@ -50,9 +56,9 @@ namespace AirUFV
         {
             return this.fuelCapacity;
         }
-        public double GetFuelConsumption()
+        public double GetConsumoCombustible()
         {
-            return this.fuelConsumption;
+            return this.consumoCombustible;
         }
         public double GetCurrentFuel()
         {
