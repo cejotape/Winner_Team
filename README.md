@@ -43,6 +43,17 @@ Fifth commit - Airport Class done!
 - Implemented "ShowStatus()", to: 
 - Display the status of each runway (Free or Occupied with ticks remaining)
 - Show the list of all aircraft with their own ID, status, distance, fuel and type.
+
+Sixth commit - Airport Class methods needed done! 
+· Created the AdvanceTick() method! 
+· This method is probably the most complicated that we have done during the PW. It simulates the passage of time (1 tick = 15 minutes)
+· We have evaluated the different states of the aircrafts: inflight, waiting, landing and onground.
+- Inflight state: it reduces the aircraft distance and fuel based on speed and consumption per km. 
+    · If the distance reaches 0, the aircraft changes to waiting state, because we assume that the aircraft has already reached the airport.
+- Waiting state: basically searches for a free runway. If is available, assigns it to the aircraft and set the status of this aircraft to landing. 
+- Landing state: in this state, the aircraft states in the airport during 3 ticks, as the PW says. Once the aircraft has occupied a runway for 3 ticks, the runway is released.
+    · The aircraft transitions to `OnGround` if it's no longer assigned to any runway. 
+· Setters added in Aircraft class, to manipulate the distance and fuel of the aircrafts.
 ----------------------------------------------------------------------------------
 Difficulties Encountered and Solutions
 
@@ -74,6 +85,23 @@ foreach (Runway runway in runways)
 #3. Common errors
 This section is not an specific one, but we have some troubles with the keys {} and the scope of some loops, in particular with foreach loops. 
 
+#4. Aircraft data was not updating correctly inside AdvanceTick()
+· Error: 
+While implementing AdvanceTick(), we initially calculated the new values for distance and fuel like this:
+
+- double newDistance = aircraft.GetDistance() - kmFlown;
+- double newFuel = aircraft.GetCurrentFuel() - boostUsed;
+
+However, we forgot to apply those changes back to the object, so the aircraft status never transitioned to Waiting, even after reaching the airport.
+Despite flying the required distance, the aircraft status remained as InFlight, and the system never allowed it to land.
+
+· Solution: We created two new setter methods inside the Aircraft class, ass you can see in the sixth commit, and then we updated the actual aircraft values using these methods:
+
+aircraft.SetDistance((int)newDistance); the int is because SetDistance needs an int attribute
+aircraft.SetCurrentFuel(newFuel);
+
+#5. Cannot use breaks
+Not using breaks posed a problem for us in dealing with state changes in aircrafts. For this, we used flags, which are bool variables that allow us to handle loops in a similar, but cleaner and more precise way than using breaks. This technique was taught to us by Hugo Cisneros, a fourth-year student.
 
 
 

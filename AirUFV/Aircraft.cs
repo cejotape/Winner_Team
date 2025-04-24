@@ -64,5 +64,15 @@ namespace AirUFV
         {
             return this.currentFuel;
         }
+
+        //New setters used to create the AdvanceTick System in Airport class!
+        public void SetDistance(int d)
+        {
+            this.distance = d;
+        }
+        public void SetCurrentFuel(double f)
+        {
+            this.currentFuel = f;
+        }
     }
 }
