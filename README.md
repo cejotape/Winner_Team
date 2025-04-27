@@ -189,6 +189,18 @@ When ticks goes 0, there was one click delay between the runway and the airport:
 ### Tenth Commit - Modified airport class and modified the `Airport` class interface! 
 - Moisés told us during a class that he created an animated ASCII airport... So we tried to upgrade our animations!
 
+## Eleventh Commit - Main Menu (Program.cs)
+
+- Created the interactive console menu inside Program.cs.
+- Menu options:
+  1. Load aircraft from file (LoadAircraftFromFile)
+  2. Add aircraft manually (AddAircraftManually)
+  3. Advance simulation tick (AdvanceTick) and show status
+  4. Exit the program
+- The menu runs in a loop until the user chooses to exit.
+- All logic follows project constraints (no break or continue).
+- Provides a clean interface to interact with the core simulator.
+
 
 ----------------------------------------------------------------------------------
 
