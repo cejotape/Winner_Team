@@ -219,8 +219,8 @@ At first we thought that working together might end up the wrong way because som
 - Just missing conclusions, next commit we will put them. 
 
 ### Thirteenth Commit - Conclusions section done
-- Moved `README` to `src folder`
-- Commented the main conclusions about the project
+- Moved `README` to `root` folder.
+- Commented the main conclusions about the project.
 
 ----------------------------------------------------------------------------------
 
