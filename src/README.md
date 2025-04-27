@@ -113,6 +113,12 @@ The solution was quite easy, just actualice each object runway of class Runway i
 When ticks goes 0, there was one click delay between the runway and the airport: the runway was free but the aircraft still in landing status. The solution was quite easy, just refresh all the runways before we touch the aircrafts! 
 
 ## Conclusions 
+Projects like this one take a lot of time and organisation is vital, we ended up doing the same things and classes twice,  because we didn't communicate enough, so for this projects in group is vital to have an strict task distribution, that is established since day 1.
+
+Not everything id going to end up working at first try, as you previously see we have had some important errors and in some of them it took some time to realise the way in which it should be done. So, in the next projects, at the time of organising we should take on account that things like this are likely to happen, and we should leave some margin to solution them.
+
+At first we thought that working together might end up the wrong way because sometimes when you work with friends they end up not taking it seriously because there is some confidence in the relationship, but we have enjoyed working together and this confidence that sometimes makes the work worse have made it easier for us to overcome various problems as a group 
+
 
 ## What we have done in each commit more explained 
 
@@ -211,6 +217,10 @@ When ticks goes 0, there was one click delay between the runway and the airport:
 - Created a folder named `repo`, with the README and the link to our github repository.
 - Ordered all the files as Moises says, just missing the solution folder because we're not sure it's going to compile.
 - Just missing conclusions, next commit we will put them. 
+
+### Thirteenth Commit - Conclusions section done
+- Moved `README` to `src folder`
+- Commented the main conclusions about the project
 
 ----------------------------------------------------------------------------------
 
