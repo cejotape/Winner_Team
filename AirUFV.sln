@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirUFV", "AirUFV\AirUFV.csproj", "{A4C1B619-F5F4-4FC6-A73C-FA6D70509A87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamPoo", "..\..\POO\PooExam\ExamPoo\ExamPoo.csproj", "{83331993-82D1-4387-A774-D84DBE30BB28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A4C1B619-F5F4-4FC6-A73C-FA6D70509A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4C1B619-F5F4-4FC6-A73C-FA6D70509A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4C1B619-F5F4-4FC6-A73C-FA6D70509A87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83331993-82D1-4387-A774-D84DBE30BB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83331993-82D1-4387-A774-D84DBE30BB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83331993-82D1-4387-A774-D84DBE30BB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83331993-82D1-4387-A774-D84DBE30BB28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

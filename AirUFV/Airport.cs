@@ -47,6 +47,7 @@ namespace AirUFV
         }
         public void AdvanceTick()
         {
+            List<Aircraft> crashedAircrafts = new List<Aircraft>(); //A list of aircrafts that not have enough fuel to get to the airport
             Console.WriteLine("ADVANCING SIMULATION TICK");
             foreach (Aircraft aircraft in aircrafts)
             {
@@ -66,14 +67,21 @@ namespace AirUFV
                     {
                         newFuel = 0;
                     }
-                    aircraft.SetDistance((int)newDistance);
-                    aircraft.SetCurrentFuel(newFuel);
-
-                    if (newDistance == 0)
+                    if (newFuel == 0)
                     {
-                        aircraft.SetStatus(Aircraft.AircraftStatus.Waiting);
+                        Console.WriteLine($"Aircraft {aircraft.GetId()} has crashed because it not has enough fuel!!");
+                        crashedAircrafts.Add(aircraft);
                     }
-                }
+                    else
+                    {
+                        aircraft.SetDistance((int)newDistance);
+                        aircraft.SetCurrentFuel(newFuel);
+                        if (newDistance == 0)
+                        {
+                            aircraft.SetStatus(Aircraft.AircraftStatus.Waiting);
+                        }
+                    }
+                }            
                 //Waiting: try to assing a free runway. Aircraft waiting for a free runway.
                 if (Aircraft.AircraftStatus.Waiting == aircraft.GetStatus())
                 {
@@ -115,6 +123,80 @@ namespace AirUFV
                     }
                 }
             }
+            foreach (Aircraft crashed in crashedAircrafts) //We remove the aircraft that not have enough fuel to land
+            {
+                aircrafts.Remove(crashed);
+            }   
+            foreach (Runway runway in runways) //We refresh the status of the runways
+            {
+                runway.AdvanceTick();
+            }
+        }
+        public void LoadAircraftFromFile(string filepath)
+        {   
+            if (!File.Exists(filepath))
+            {
+                Console.WriteLine("ERROR: File not found.");
+                return;
+            }
+
+            string[] lines = File.ReadAllLines(filepath);
+
+            foreach (string line in lines)
+            {
+                try
+                {
+                    string[] parts = line.Split(','); //The splitter between the different attributes is a comma ","
+
+                    if (parts.Length >= 8) //If the line has a valid length:
+                    {
+                        string id = parts[0];
+                        Aircraft.AircraftStatus status = Enum.Parse<Aircraft.AircraftStatus>(parts[1]);
+                        int distance = int.Parse(parts[2]);
+                        int speed = int.Parse(parts[3]);
+                        string type = parts[4];
+                        double fuelCapacity = double.Parse(parts[5]);
+                        double consumoCombustible = double.Parse(parts[6]);
+                        Aircraft aircraft = null;
+
+                        if (type == "Commercial")
+                        {
+                            int passengers = int.Parse(parts[7]); //int because the extra attribute of this subclass is an int type
+                            aircraft = new CommercialAircraft(id, status, distance, type, speed, fuelCapacity, consumoCombustible, fuelCapacity, passengers);
+                        }
+                        else if (type == "Cargo") 
+                        {
+                            double maxLoad = double.Parse(parts[7]); //double because the extra attribute of this subclass is a double type
+                            aircraft = new CargoAircraft(id, status, distance, type, speed, fuelCapacity, consumoCombustible, fuelCapacity, maxLoad);
+                        }
+                        else if (type == "Private") 
+                        {
+                            string owner = parts[7];
+                            aircraft = new PrivateAircraft(id, status, distance, type, speed, fuelCapacity, consumoCombustible, fuelCapacity, owner);
+                        } 
+                        else //If there is an error, the aircraft is declared as null
+                        {
+                            Console.WriteLine($"ERROR: Unknown aircraft type: {type}");
+                            aircraft = null;
+                        }
+
+                        if (aircraft != null) //If the aircraft has the correct length and everything is ok, we call the method AddAircraft to add it to aircrafts list!
+                        {
+                            AddAircraft(aircraft);
+                            Console.WriteLine($"Aircraft {id} loaded successfully.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"ERROR: Invalid format in line: {line}");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"ERROR processing line: {line}");
+                    Console.WriteLine($"Details: {e.Message}");
+                }
+            }       
         }
     }
 }

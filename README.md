@@ -54,6 +54,17 @@ Sixth commit - Airport Class methods needed done!
 - Landing state: in this state, the aircraft states in the airport during 3 ticks, as the PW says. Once the aircraft has occupied a runway for 3 ticks, the runway is released.
     · The aircraft transitions to `OnGround` if it's no longer assigned to any runway. 
 · Setters added in Aircraft class, to manipulate the distance and fuel of the aircrafts.
+
+Seventh Commit – LoadAircraftFromFile() method + Fuel Crash Logic done!
+· Implemented the method LoadAircraftFromFile() inside the Airport class.
+· Loads aircraft from a `.csv` file with fields: 
+  - `ID`, `Status`, `Distance`, `Speed`, `Type`, `FuelCapacity`, `ConsumoCombustible`, and an extra depending on the type (passengers, cargo, or owner).
+· Supports the 3 aircraft subclasses.
+· Includes full input validation and error handling (format issues, unknown types, etc.).
+· Added crash logic (as Moisés told us in class):
+  - During AdvanceTick(), if an aircraft's fuel reaches 0 while flying, it's removed from the simulation and a crash message is shown.
+    - To do this, we created an auxiliar list which has all the crashed aircrafts (because they have no fuel).
+
 ----------------------------------------------------------------------------------
 Difficulties Encountered and Solutions
 
@@ -102,6 +113,14 @@ aircraft.SetCurrentFuel(newFuel);
 
 #5. Cannot use breaks
 Not using breaks posed a problem for us in dealing with state changes in aircrafts. For this, we used flags, which are bool variables that allow us to handle loops in a similar, but cleaner and more precise way than using breaks. This technique was taught to us by Hugo Cisneros, a fourth-year student.
+
+#6. Runways not refresh 
+This is because we have created the correct methods in Runway class, but we haven't actualiced during the AdvanceTick() method! 
+The solution was quite easy, just actualice each object runway of class Runway in the list runways! 
+    foreach (Runway runway in runways) //We refresh the status of the runways
+    {
+        runway.AdvanceTick();
+    }
 
 
 
