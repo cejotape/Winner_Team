@@ -30,14 +30,6 @@ As PW says, the simulator is a tick-based simulator, updating every 15 minute in
 
 ### Structure overview
 The system is structured in multiple classes:
-- **Aircraft (Base Class)**  
-  With common attributes: `id`, `status`, `distance`, `speed`, `fuelCapacity`, `consumoCombustible`, `currentFuel`, `type`
-  
-- **Subclasses**  
-  - `CommercialAircraft`: adds `numberOfPassengers`
-  - `CargoAircraft`: adds `maximumLoad`
-  - `PrivateAircraft`: adds `owner`
-
 - **Runway**  
   - Attributes: `id`, `status`, `currentAircraft`, `ticksRemaining`
   - Methods: `RequestRunway()`, `AdvanceTick()`, `ReleaseRunway()`
@@ -51,7 +43,17 @@ The system is structured in multiple classes:
     - `AdvanceTick()`
     - `ShowStatus()`
 
+- **Aircraft (Base Class)**  
+  With common attributes: `id`, `status`, `distance`, `speed`, `fuelCapacity`, `consumoCombustible`, `currentFuel`, `type`
+
+- **Subclasses**  
+  - `CommercialAircraft`: adds `numberOfPassengers`
+  - `CargoAircraft`: adds `maximumLoad`
+  - `PrivateAircraft`: adds `owner`
+
 ### Class diagram
+
+![Class Diagram](docs/class_diagram.png)
 
 ## Difficulties Encountered and Solutions
 
@@ -106,9 +108,11 @@ The solution was quite easy, just actualice each object runway of class Runway i
     {
         runway.AdvanceTick();
     }
+
 ### 7. Refresh problem! 
 When ticks goes 0, there was one click delay between the runway and the airport: the runway was free but the aircraft still in landing status. The solution was quite easy, just refresh all the runways before we touch the aircrafts! 
 
+## Conclusions 
 
 ## What we have done in each commit more explained 
 
@@ -189,7 +193,7 @@ When ticks goes 0, there was one click delay between the runway and the airport:
 ### Tenth Commit - Modified airport class and modified the `Airport` class interface! 
 - Moisés told us during a class that he created an animated ASCII airport... So we tried to upgrade our animations!
 
-## Eleventh Commit - Main Menu (Program.cs)
+### Eleventh Commit - Main Menu (Program.cs)
 
 - Created the interactive console menu inside Program.cs.
 - Menu options:
@@ -201,6 +205,12 @@ When ticks goes 0, there was one click delay between the runway and the airport:
 - All logic follows project constraints (no break or continue).
 - Provides a clean interface to interact with the core simulator.
 
+### Twelfth Commit - Class diagram done and files ready to submit
+- Created a folder named `files`
+  - Inside, we created a csv file, `aircrafts.csv` in our case. 
+- Created a folder named `repo`, with the README and the link to our github repository.
+- Ordered all the files as Moises says, just missing the solution folder because we're not sure it's going to compile.
+- Just missing conclusions, next commit we will put them. 
 
 ----------------------------------------------------------------------------------
 

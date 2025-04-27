@@ -1,0 +1,6 @@
+AC101,Inflight,120,600,Commercial,8000,5.5,180
+CG202,Waiting,0,500,Cargo,10000,8.0,1200.5
+PR303,Inflight,300,400,Private,3000,4.2,Alonso Fontecha
+AC104,Landing,0,580,Commercial,8500,5.0,200
+CG205,Inflight,200,450,Cargo,9500,7.8,1000.75
+PR306,Waiting,0,390,Private,2800,4.0,Ibarcia
