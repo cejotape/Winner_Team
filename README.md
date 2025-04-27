@@ -65,6 +65,12 @@ Seventh Commit – LoadAircraftFromFile() method + Fuel Crash Logic done!
   - During AdvanceTick(), if an aircraft's fuel reaches 0 while flying, it's removed from the simulation and a crash message is shown.
     - To do this, we created an auxiliar list which has all the crashed aircrafts (because they have no fuel).
 
+Eight Commit - AddAircraftManually() from Console
+· Added the method AddAircraftManually() in the Airport class.
+· Allows the user to create aircraft manually via keyboard.
+· Prompts user to select aircraft type and enter all required fields:
+  - `ID`, `status`, `distance`, `speed`, `fuel capacity`, `fuel consumption` and `type-specific attribute`.
+
 ----------------------------------------------------------------------------------
 Difficulties Encountered and Solutions
 

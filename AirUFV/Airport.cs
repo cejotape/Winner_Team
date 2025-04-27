@@ -198,5 +198,72 @@ namespace AirUFV
                 }
             }       
         }
+        public void AddAircraftManually()
+        {
+            Console.WriteLine("Choose aircraft type:");
+            Console.WriteLine("1. Commercial");
+            Console.WriteLine("2. Cargo");
+            Console.WriteLine("3. Private");
+            Console.Write("Option: ");
+            string option = Console.ReadLine();
+
+            Aircraft aircraft = null;
+
+            try
+            {
+                Console.Write("Enter ID: ");
+                string id = Console.ReadLine();
+
+                Console.Write("Enter status (Inflight, Waiting, Landing, OnGround): ");
+                string statusInput = Console.ReadLine();
+                Aircraft.AircraftStatus status = Enum.Parse<Aircraft.AircraftStatus>(statusInput, true);
+
+                Console.Write("Enter distance (km): ");
+                int distance = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter speed (km/h): ");
+                int speed = int.Parse(Console.ReadLine());
+
+                Console.Write("Enter fuel capacity (L): ");
+                double fuelCapacity = double.Parse(Console.ReadLine());
+
+                Console.Write("Enter fuel consumption (L/km): ");
+                double consumoCombustible = double.Parse(Console.ReadLine());
+
+                double currentFuel = fuelCapacity; // default full tank
+
+                if (option == "1")
+                {
+                    Console.Write("Enter number of passengers: ");
+                    int passengers = int.Parse(Console.ReadLine());
+                    aircraft = new CommercialAircraft(id, status, distance, "Commercial", speed, fuelCapacity, consumoCombustible, currentFuel, passengers);
+                }
+                else if (option == "2")
+                {
+                    Console.Write("Enter max load (kg): ");
+                    double maxLoad = double.Parse(Console.ReadLine());
+                    aircraft = new CargoAircraft(id, status, distance, "Cargo", speed, fuelCapacity, consumoCombustible, currentFuel, maxLoad);
+                }       
+                else if (option == "3")
+                {
+                    Console.Write("Enter owner name: ");
+                    string owner = Console.ReadLine();
+                    aircraft = new PrivateAircraft(id, status, distance, "Private", speed, fuelCapacity, consumoCombustible, currentFuel, owner);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option. Aircraft not added.");
+                    return;
+                }
+
+                AddAircraft(aircraft);
+                Console.WriteLine($"Aircraft {id} added successfully!");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Invalid input.");
+                Console.WriteLine($"Details: {e.Message}");
+            }
+        }
     }
 }
