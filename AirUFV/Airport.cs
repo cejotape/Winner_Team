@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 namespace AirUFV
 {
     public class Airport
@@ -26,7 +27,9 @@ namespace AirUFV
         }
         public void ShowStatus()
         {
-            Console.WriteLine("/////RUNWAYS/////");
+            Console.WriteLine("|----------------------------|");
+            Console.WriteLine("| ======== RUNWAYS ========= |");
+            Console.WriteLine("|----------------------------|");
             foreach (Runway runway in runways)
             {
                 Console.Write($"[{runway.GetId()}] - ");
@@ -39,7 +42,9 @@ namespace AirUFV
                     Console.WriteLine($"Occupied by {runway.GetCurrentAircraft().GetId()} ({runway.GetTicksRemaining()} ticks remaining)");
                 }
             }
-            Console.WriteLine("\n/////AIRCRAFTS/////");
+            Console.WriteLine("|----------------------------|");
+            Console.WriteLine("| ======= AIRCRAFTS ======== |");
+            Console.WriteLine("|----------------------------|");
             foreach (Aircraft a in aircrafts)
             {
                 Console.WriteLine($"{a.GetId()} | {a.GetStatus()} | Distance: {a.GetDistance()} km | Fuel: {a.GetCurrentFuel():0.00}L | Type: {a.GetTypeAircraft()}");
@@ -48,7 +53,14 @@ namespace AirUFV
         public void AdvanceTick()
         {
             List<Aircraft> crashedAircrafts = new List<Aircraft>(); //A list of aircrafts that not have enough fuel to get to the airport
-            Console.WriteLine("ADVANCING SIMULATION TICK");
+            Console.WriteLine("|----------------------------|");
+            Console.WriteLine("| ADVANCING SIMULATION TICk! |");
+            Console.WriteLine("|----------------------------|");
+            
+            foreach (Runway runway in runways) //We refresh the status of the runways
+            {
+                runway.AdvanceTick();
+            }
             foreach (Aircraft aircraft in aircrafts)
             {
                 //Inflight: update distance and fuel. 
@@ -69,6 +81,17 @@ namespace AirUFV
                     }
                     if (newFuel == 0)
                     {
+                        Console.WriteLine("     \\ | /");
+                        Console.WriteLine("      \\*/ ");
+                        Console.WriteLine("       |");
+                        Console.WriteLine("     .-'-.");
+                        Console.WriteLine("   /       \\");
+                        Console.WriteLine("  |  BOOM!  |");
+                        Console.WriteLine("   \\       /");
+                        Console.WriteLine("     `---`");
+                        Console.WriteLine("    (_____)");
+                        Console.WriteLine("     /   \\");
+
                         Console.WriteLine($"Aircraft {aircraft.GetId()} has crashed because it not has enough fuel!!");
                         crashedAircrafts.Add(aircraft);
                     }
@@ -81,7 +104,7 @@ namespace AirUFV
                             aircraft.SetStatus(Aircraft.AircraftStatus.Waiting);
                         }
                     }
-                }            
+                }
                 //Waiting: try to assing a free runway. Aircraft waiting for a free runway.
                 if (Aircraft.AircraftStatus.Waiting == aircraft.GetStatus())
                 {
@@ -126,10 +149,6 @@ namespace AirUFV
             foreach (Aircraft crashed in crashedAircrafts) //We remove the aircraft that not have enough fuel to land
             {
                 aircrafts.Remove(crashed);
-            }   
-            foreach (Runway runway in runways) //We refresh the status of the runways
-            {
-                runway.AdvanceTick();
             }
         }
         public void LoadAircraftFromFile(string filepath)
@@ -200,12 +219,16 @@ namespace AirUFV
         }
         public void AddAircraftManually()
         {
-            Console.WriteLine("Choose aircraft type:");
-            Console.WriteLine("1. Commercial");
-            Console.WriteLine("2. Cargo");
-            Console.WriteLine("3. Private");
-            Console.Write("Option: ");
-            string option = Console.ReadLine();
+            Console.WriteLine("|----------------------------|");
+            Console.WriteLine("| Choose aircraft type:      |");
+            Console.WriteLine("|----------------------------|");
+            Console.WriteLine("| 1. Commercial              |");
+            Console.WriteLine("| 2. Cargo                   |");
+            Console.WriteLine("| 3. Private                 |");
+            Console.WriteLine("|----------------------------|");
+            Console.Write("Option:");
+
+                string option = Console.ReadLine();
 
             Aircraft aircraft = null;
 
@@ -214,9 +237,7 @@ namespace AirUFV
                 Console.Write("Enter ID: ");
                 string id = Console.ReadLine();
 
-                Console.Write("Enter status (Inflight, Waiting, Landing, OnGround): ");
-                string statusInput = Console.ReadLine();
-                Aircraft.AircraftStatus status = Enum.Parse<Aircraft.AircraftStatus>(statusInput, true);
+                Aircraft.AircraftStatus status = Aircraft.AircraftStatus.Inflight; //If we created a new plane, we expect that is not already in the airport
 
                 Console.Write("Enter distance (km): ");
                 int distance = int.Parse(Console.ReadLine());
