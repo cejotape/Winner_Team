@@ -12,7 +12,7 @@ A tick-based aircraft developed by the Winner_Team! -- OOP Final Project, UFV (2
 
 -----------------------------------------------------------------------------------
 
-## INTRODUCTION
+## Introduction
 Basically, this project simulates the landing process of multiple aircraft at an airport (with the different runways it may has). It models aircraft behavior using the object-orie**nted programming principles (inheritance, encapsulation and class interaction). 
 
 **Team members**:
@@ -55,7 +55,7 @@ The system is structured in multiple classes:
 
 ![Class Diagram](docs/class_diagram.png)
 
-## Difficulties Encountered and Solutions
+## Problems Encountered
 
 ### 1. Using a variable outside a foreach loop
 - Error:
